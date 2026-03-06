@@ -156,7 +156,7 @@
   /* TABLE */
   .table-wrap { padding: 0 40px 40px; }
   table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-  thead th { background: var(--surface2); color: var(--text-dim); font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); position: sticky; top: 162px; z-index: 80; }
+  thead th { background: var(--surface2); color: var(--text-dim); font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 80; }
   thead th:first-child { border-radius: 8px 0 0 0; }
   thead th:last-child { border-radius: 0 8px 0 0; }
   tr[data-region]:not(.section-row) td,
@@ -2977,6 +2977,7 @@
   }
   setStickyTop();
   window.addEventListener('resize', setStickyTop);
+  window.addEventListener('load', setStickyTop);
 
   function filterOstatni() {
     var q = (document.getElementById('ostatni-q').value||'').toLowerCase().trim();
