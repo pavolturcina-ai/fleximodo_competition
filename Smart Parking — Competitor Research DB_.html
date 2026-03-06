@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="sk" class="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -276,6 +276,28 @@
 </head>
 <body>
 
+<div id="auth-wall" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif">
+  <div style="text-align:center;max-width:340px">
+    <div style="font-size:32px;margin-bottom:12px">🔒</div>
+    <h2 style="font-size:18px;font-weight:600;color:#1a1a2e;margin-bottom:6px">Competitor Research DB</h2>
+    <p style="font-size:13px;color:#888;margin-bottom:20px">Zadajte heslo pre prístup</p>
+    <input type="password" id="auth-pw" placeholder="Heslo..." style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;outline:none;text-align:center" onkeydown="if(event.key==='Enter')checkAuth()">
+    <p id="auth-err" style="color:#ef4444;font-size:12px;margin-top:8px;display:none">Nesprávne heslo</p>
+  </div>
+</div>
+<script>
+function checkAuth(){
+  if(document.getElementById('auth-pw').value==='competitors'){
+    document.getElementById('auth-wall').style.display='none';
+    sessionStorage.setItem('auth','1');
+  } else {
+    document.getElementById('auth-err').style.display='block';
+    document.getElementById('auth-pw').value='';
+  }
+}
+if(sessionStorage.getItem('auth')==='1') document.getElementById('auth-wall').style.display='none';
+</script>
+
 <header>
   <div class="logo-area">
     <div class="logo-dot"></div>
@@ -284,8 +306,8 @@
   <div class="header-right">
     <span class="tag" id="updated-tag">2026-03</span>
     <div class="theme-toggle">
-      <button class="theme-btn active" onclick="setTheme('dark')" id="btn-dark" title="Dark mode">&#9790;</button>
-      <button class="theme-btn" onclick="setTheme('light')" id="btn-light" title="Light mode">&#9788;</button>
+      <button class="theme-btn" onclick="setTheme('dark')" id="btn-dark" title="Dark mode">&#9790;</button>
+      <button class="theme-btn active" onclick="setTheme('light')" id="btn-light" title="Light mode">&#9788;</button>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('sk')" id="btn-sk">SK</button>
