@@ -491,6 +491,31 @@
       <button class="filter-btn" onclick="filterRegion('global', this)" data-sk="Globálne 🌍" data-en="Global 🌍">Globálne 🌍</button>
     </div>
 
+    <!-- OSTATNÍ FILTERS -->
+    <div class="filter-panel" id="filters-ostatni">
+      <select id="ostatni-cf" onchange="filterOstatni()" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 10px;outline:none;cursor:pointer">
+        <option value="">Všetky firmy</option>
+        <option value="civicsmart">CivicSmart</option>
+        <option value="fybr">Fybr</option>
+        <option value="pni">PNI / PlacePod</option>
+        <option value="streetline">Streetline</option>
+        <option value="communithings">CommuniThings</option>
+        <option value="parkhelp">ParkHelp</option>
+        <option value="paradox">Paradox Eng.</option>
+        <option value="nwave">Nwave</option>
+        <option value="spl">Smart Parking Ltd.</option>
+        <option value="frog">Frogparking</option>
+        <option value="datakorum">Datakorum</option>
+        <option value="sensative">Sensative</option>
+        <option value="scs">Smart City System</option>
+        <option value="iem">IEM / PrestoSense</option>
+        <option value="smartlynx">Smart Lynx</option>
+        <option value="cicicom">Cicicom</option>
+        <option value="option">Option NV</option>
+      </select>
+      <span class="ostatni-stat">Zobrazených: <b id="ostatni-vis">99</b> z 99</span>
+    </div>
+
   </div>
 </div>
 
@@ -2565,30 +2590,6 @@
 
 <!-- ═══════════ OSTATNÍ 29 ═══════════ -->
 <div id="ostatni-wrap">
-  <div id="ostatni-controls">
-    <input type="text" id="ostatni-q" placeholder="🔍 Hľadaj: firma, mesto, krajina…" oninput="filterOstatni()">
-    <select id="ostatni-cf" onchange="filterOstatni()">
-      <option value="">Všetky firmy</option>
-      <option value="civicsmart">CivicSmart</option>
-      <option value="fybr">Fybr</option>
-      <option value="pni">PNI / PlacePod</option>
-      <option value="streetline">Streetline</option>
-      <option value="communithings">CommuniThings</option>
-      <option value="parkhelp">ParkHelp</option>
-      <option value="paradox">Paradox Eng.</option>
-      <option value="nwave">Nwave</option>
-      <option value="spl">Smart Parking Ltd.</option>
-      <option value="frog">Frogparking</option>
-      <option value="datakorum">Datakorum</option>
-      <option value="sensative">Sensative</option>
-      <option value="scs">Smart City System</option>
-      <option value="iem">IEM / PrestoSense</option>
-      <option value="smartlynx">Smart Lynx</option>
-      <option value="cicicom">Cicicom</option>
-      <option value="option">Option NV</option>
-    </select>
-    <span class="ostatni-stat">Zobrazených: <b id="ostatni-vis">99</b> z 99</span>
-  </div>
   <div id="ostatni-outer">
     <table id="ostatni-tbl">
     <thead><tr>
@@ -2762,6 +2763,7 @@
     document.getElementById('filters-elvnx').classList.toggle('active', tab === 'elvnx');
     document.getElementById('filters-libelium').classList.toggle('active', tab === 'libelium');
     document.getElementById('filters-fleximodo').classList.toggle('active', tab === 'fleximodo');
+    document.getElementById('filters-ostatni').classList.toggle('active', tab === 'ostatni');
     // ostatni has its own inline controls — no filter panel needed
     // fleximodo has its own filter panel below
 
@@ -2924,6 +2926,9 @@
         }
         sec.classList.toggle('hidden', !hasVisible);
       });
+    } else if (currentTab === 'ostatni') {
+      filterOstatni();
+      return;
     }
 
     document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
@@ -2973,7 +2978,7 @@
   window.addEventListener('load', setStickyTop);
 
   function filterOstatni() {
-    var q = (document.getElementById('ostatni-q').value||'').toLowerCase().trim();
+    var q = (document.getElementById('search-input').value||'').toLowerCase().trim();
     var cf = (document.getElementById('ostatni-cf').value||'').toLowerCase();
     var rows = document.querySelectorAll('#ostatni-body tr');
     var vis = 0;
