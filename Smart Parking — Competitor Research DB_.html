@@ -485,10 +485,6 @@
 
     <!-- FLEXIMODO FILTERS -->
     <div class="filter-panel" id="filters-fleximodo">
-      <div class="search-box" style="display:inline-flex;margin-right:8px">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="flexi-q" placeholder="Hľadať klienta, mesto, krajinu..." oninput="applyFilters()" style="width:220px">
-      </div>
       <button class="filter-btn active" onclick="filterRegion('all', this)">Všetky</button>
       <button class="filter-btn" onclick="filterRegion('eu', this)" data-sk="Európa 🇪🇺" data-en="Europe 🇪🇺">Európa 🇪🇺</button>
       <button class="filter-btn" onclick="filterRegion('me', this)" data-sk="Str. Východ 🌙" data-en="Middle East 🌙">Str. Východ 🌙</button>
@@ -2908,7 +2904,7 @@
         sec.classList.toggle('hidden', !hasVisible);
       });
     } else if (currentTab === 'fleximodo') {
-      const flexi_q = (document.getElementById('flexi-q') ? document.getElementById('flexi-q').value : '').toLowerCase().trim();
+      const flexi_q = (document.getElementById('search-input').value || '').toLowerCase().trim();
       const flexi_region = currentRegion;
       document.querySelectorAll('#flexi-body tr[data-competitor="fleximodo"]').forEach(row => {
         if (row.classList.contains('section-row')) return;
