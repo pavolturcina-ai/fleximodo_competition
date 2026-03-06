@@ -26,6 +26,26 @@
     --elvnx: #0ea5e9;
     --libelium: #22c55e;
   }
+  html.light {
+    --bg: #f5f7fa;
+    --surface: #ffffff;
+    --surface2: #edf0f5;
+    --border: #d8dce6;
+    --accent: #2563eb;
+    --accent2: #7c3aed;
+    --text: #1a1a2e;
+    --text-dim: #6b7280;
+    --text-mid: #4b5563;
+    --green: #059669;
+    --amber: #d97706;
+    --red: #dc2626;
+    --row-hover: #f0f4ff;
+    --flag-bg: #edf0f5;
+    --bosch-red: #dc2626;
+    --mob-teal: #0d9488;
+    --elvnx: #0284c7;
+    --libelium: #16a34a;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
@@ -40,6 +60,21 @@
   .lang-toggle { display: flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .lang-btn { background: none; border: none; color: var(--text-dim); font-size: 11px; font-family: 'DM Mono', monospace; padding: 5px 10px; cursor: pointer; transition: all .15s; }
   .lang-btn.active { background: var(--accent); color: #fff; }
+  .theme-toggle { display: flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .theme-btn { background: none; border: none; color: var(--text-dim); font-size: 13px; padding: 5px 10px; cursor: pointer; transition: all .15s; line-height: 1; }
+  .theme-btn.active { background: var(--accent); color: #fff; }
+  html.light .top5-card { background: rgba(0,0,0,.03); }
+  html.light .top5-card:hover { background: rgba(0,0,0,.06); }
+  html.light .score-pill { background: rgba(0,0,0,.05); border-color: rgba(0,0,0,.1); color: var(--text-dim); }
+  html.light .comp-pill { opacity: .9; }
+  html.light ::-webkit-scrollbar-track { background: var(--bg); }
+  html.light ::-webkit-scrollbar-thumb { background: #c4c9d4; }
+  html.light .nedap-exit-tag { background: rgba(217,119,6,.1); border-color: rgba(217,119,6,.3); color: #d97706; }
+  html.light .bosch-exit-tag { background: rgba(220,38,38,.1); border-color: rgba(220,38,38,.3); color: #dc2626; }
+  html.light .mob-exit-tag { background: rgba(13,148,136,.1); border-color: rgba(13,148,136,.3); color: #0d9488; }
+  html.light .elvnx-tag { background: rgba(2,132,199,.1); border-color: rgba(2,132,199,.3); color: #0284c7; }
+  html.light .libelium-tag { background: rgba(22,163,74,.1); border-color: rgba(22,163,74,.3); color: #16a34a; }
+  html.light .flexi-live-tag { background: rgba(217,119,6,.1); border-color: rgba(217,119,6,.25); color: #d97706; }
 
   /* HERO */
   .hero { padding: 32px 40px 24px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; border-bottom: 1px solid var(--border); }
@@ -248,6 +283,10 @@
   </div>
   <div class="header-right">
     <span class="tag" id="updated-tag">2026-03</span>
+    <div class="theme-toggle">
+      <button class="theme-btn active" onclick="setTheme('dark')" id="btn-dark" title="Dark mode">&#9790;</button>
+      <button class="theme-btn" onclick="setTheme('light')" id="btn-light" title="Light mode">&#9788;</button>
+    </div>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('sk')" id="btn-sk">SK</button>
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
@@ -256,11 +295,7 @@
 </header>
 
 <!-- HERO -->
-<div class="hero">
-  <div>
-    <div class="hero-title" id="hero-title" data-sk="Prehľad klientov &amp; nasadení" data-en="Client &amp; Deployment Overview">Prehľad klientov &amp; nasadení</div>
-    
-  </div>
+<div class="hero" style="grid-template-columns:1fr;">
   <div class="top5-panel">
     <div class="top5-title"><span data-sk="🏆 TOP 5 Smart Parking Providers — globálna relevancia" data-en="🏆 TOP 5 Smart Parking Providers — global relevance">🏆 TOP 5 Smart Parking Providers — globálna relevancia</span></div>
     <div class="top5-grid">
@@ -342,6 +377,7 @@
 
 <!-- TABS -->
 <div class="tab-bar">
+  <!-- AKTÍVNI — podľa relevancie -->
   <button class="tab-btn active" onclick="switchTab('urbiotica', this)" id="tab-urb">
     <span>Urbiotica</span>
     <span class="tab-count">85</span>
@@ -350,16 +386,6 @@
     <span>Fleximodo</span>
     <span class="tab-count">33</span>
     <span class="flexi-live-tag">Aktívny</span>
-  </button>
-  <button class="tab-btn nedap-tab" onclick="switchTab('nedap', this)" id="tab-nedap">
-    <span>Nedap SENSIT</span>
-    <span class="tab-count">52</span>
-    <span class="nedap-exit-tag" data-sk="Exited 2022" data-en="Exited 2022">Exited 2022</span>
-  </button>
-  <button class="tab-btn bosch-tab" onclick="switchTab('bosch', this)" id="tab-bosch">
-    <span>Bosch PLS</span>
-    <span class="tab-count">26</span>
-    <span class="bosch-exit-tag" data-sk="Exited ~2023" data-en="Exited ~2023">Exited ~2023</span>
   </button>
   <button class="tab-btn mob-tab" onclick="switchTab('mobilisis', this)" id="tab-mob">
     <span>SICK Mobilisis</span>
@@ -375,6 +401,18 @@
     <span>Libelium</span>
     <span class="tab-count">10</span>
     <span class="libelium-tag" data-sk="Aktívny" data-en="Active">Active</span>
+  </button>
+  <!-- VYPADNUTÉ — vpravo -->
+  <span style="display:flex;align-items:center;padding:0 4px;color:var(--border)">│</span>
+  <button class="tab-btn nedap-tab" onclick="switchTab('nedap', this)" id="tab-nedap">
+    <span>Nedap SENSIT</span>
+    <span class="tab-count">52</span>
+    <span class="nedap-exit-tag" data-sk="Exited 2022" data-en="Exited 2022">Exited 2022</span>
+  </button>
+  <button class="tab-btn bosch-tab" onclick="switchTab('bosch', this)" id="tab-bosch">
+    <span>Bosch PLS</span>
+    <span class="tab-count">26</span>
+    <span class="bosch-exit-tag" data-sk="Exited ~2023" data-en="Exited ~2023">Exited ~2023</span>
   </button>
   <button class="tab-btn ostatni-tab" onclick="switchTab('ostatni', this)" id="tab-ostatni">
     <span><span data-sk="Ostatní 29" data-en="Others 29">Ostatní 29</span></span>
@@ -2747,6 +2785,12 @@
       s.classList.toggle('hidden',!ok);
     });
     var el=document.getElementById('ostatni-vis'); if(el) el.textContent=vis;
+  }
+
+  function setTheme(theme) {
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.getElementById('btn-dark').classList.toggle('active', theme === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', theme === 'light');
   }
 
   setLang('sk');
