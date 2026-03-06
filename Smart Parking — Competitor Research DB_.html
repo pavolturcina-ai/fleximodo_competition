@@ -47,7 +47,7 @@
     --libelium: #16a34a;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   /* HEADER */
   header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 40px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 64px; }
@@ -154,9 +154,9 @@
   .nedap-filter-btn.active { background: var(--amber); color: #0b0e14; border-color: var(--amber); }
 
   /* TABLE */
-  .table-wrap { overflow-x: auto; padding: 0 40px 40px; }
+  .table-wrap { padding: 0 40px 40px; }
   table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-  thead th { background: var(--surface2); color: var(--text-dim); font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); position: sticky; top: 162px; z-index: 80; }
+  thead th { background: var(--surface2); color: var(--text-dim); font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); }
   thead th:first-child { border-radius: 8px 0 0 0; }
   thead th:last-child { border-radius: 0 8px 0 0; }
   tr[data-region]:not(.section-row) td,
@@ -485,10 +485,6 @@
 
     <!-- FLEXIMODO FILTERS -->
     <div class="filter-panel" id="filters-fleximodo">
-      <div class="search-box" style="display:inline-flex;margin-right:8px">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="flexi-q" placeholder="Hľadať klienta, mesto, krajinu..." oninput="applyFilters()" style="width:220px">
-      </div>
       <button class="filter-btn active" onclick="filterRegion('all', this)">Všetky</button>
       <button class="filter-btn" onclick="filterRegion('eu', this)" data-sk="Európa 🇪🇺" data-en="Europe 🇪🇺">Európa 🇪🇺</button>
       <button class="filter-btn" onclick="filterRegion('me', this)" data-sk="Str. Východ 🌙" data-en="Middle East 🌙">Str. Východ 🌙</button>
@@ -2908,7 +2904,7 @@
         sec.classList.toggle('hidden', !hasVisible);
       });
     } else if (currentTab === 'fleximodo') {
-      const flexi_q = (document.getElementById('flexi-q') ? document.getElementById('flexi-q').value : '').toLowerCase().trim();
+      const flexi_q = (document.getElementById('search-input').value || '').toLowerCase().trim();
       const flexi_region = currentRegion;
       document.querySelectorAll('#flexi-body tr[data-competitor="fleximodo"]').forEach(row => {
         if (row.classList.contains('section-row')) return;
@@ -2970,13 +2966,11 @@
     const ctrlH = controls ? controls.offsetHeight : 0;
     if (tabBar) tabBar.style.top = headerH + 'px';
     if (controls) controls.style.top = (headerH + tabH) + 'px';
-    const theadTop = headerH + tabH + ctrlH;
-    document.querySelectorAll('thead th').forEach(th => {
-      th.style.top = theadTop + 'px';
-    });
+    /* thead is not sticky — no top needed */
   }
   setStickyTop();
   window.addEventListener('resize', setStickyTop);
+  window.addEventListener('load', setStickyTop);
 
   function filterOstatni() {
     var q = (document.getElementById('ostatni-q').value||'').toLowerCase().trim();
