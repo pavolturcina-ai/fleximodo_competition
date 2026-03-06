@@ -87,7 +87,7 @@
   .stat-label { font-size: 10px; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-top: 2px; }
 
   /* TABS */
-  .tab-bar { display: flex; gap: 0; padding: 0 40px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 64px; z-index: 95; }
+  .tab-bar { display: flex; gap: 0; padding: 0 40px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 64px; z-index: 95; overflow-x: auto; }
   .tab-btn { display: flex; align-items: center; gap: 8px; padding: 14px 22px; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-dim); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all .2s; letter-spacing: 0.02em; }
   .tab-btn:hover { color: var(--text); }
   .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
@@ -385,22 +385,18 @@
   <button class="tab-btn flexi-tab" onclick="switchTab('fleximodo', this)" id="tab-flexi">
     <span>Fleximodo</span>
     <span class="tab-count">33</span>
-    <span class="flexi-live-tag">Aktívny</span>
   </button>
   <button class="tab-btn mob-tab" onclick="switchTab('mobilisis', this)" id="tab-mob">
     <span>SICK Mobilisis</span>
     <span class="tab-count">16</span>
-    <span class="mob-exit-tag" data-sk="Aktívny" data-en="Active">Active</span>
   </button>
   <button class="tab-btn elvnx-tab" onclick="switchTab('elvnx', this)" id="tab-elvnx">
     <span>eleven-x</span>
     <span class="tab-count">17</span>
-    <span class="elvnx-tag" data-sk="Aktívny" data-en="Active">Active</span>
   </button>
   <button class="tab-btn libelium-tab" onclick="switchTab('libelium', this)" id="tab-libelium">
     <span>Libelium</span>
     <span class="tab-count">10</span>
-    <span class="libelium-tag" data-sk="Aktívny" data-en="Active">Active</span>
   </button>
   <!-- VYPADNUTÉ — vpravo -->
   <span style="display:flex;align-items:center;padding:0 4px;color:var(--border)">│</span>
@@ -517,7 +513,6 @@
     <th data-sk="Dátum" data-en="Date">Dátum</th>
   </tr>
 </thead>
-<tbody id="table-body">
 <tbody id="table-body">
 
 <!-- ── ŠPANIELSKO ─────────────────────────────────────────────── -->
